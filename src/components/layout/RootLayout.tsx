@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+// import { useState } from "react";
 import "./RootLayout.css";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 const RootLayout = () => {
-  const [sideBarOpen, setSideBarOpen] = useState(true);
+  // const [sideBarOpen, setSideBarOpen] = useState(true);
   return (
     <div className="wrapper">
-      {sideBarOpen && <Sidebar />}
-
+      {/* {sideBarOpen && <Sidebar />} */}
+      <Sidebar />
       <main className="main-container">
         {/* <button
           type="button"

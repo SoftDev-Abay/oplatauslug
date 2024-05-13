@@ -1,4 +1,3 @@
-import React from "react";
 import "./AddCashier.css"; // Importing the CSS file
 
 const AddCashier = () => {

@@ -1,8 +1,7 @@
-import React from "react";
-import { IoChevronDown } from "react-icons/io5";
+// import React from "react";
+// import { IoChevronDown } from "react-icons/io5";
 import "./Sidebar.css";
 import LinksBox from "./LinksBox";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 const links = [
   {
@@ -44,10 +43,14 @@ const links = [
       },
     ],
   },
+  {
+    title: "Оплата",
+    url: "/pay",
+    img: "/img/credit-card.png",
+  },
 ];
 
 const Sidebar = () => {
-  const navigate = useNavigate();
   return (
     <div className="sidebar">
       <div className="link main-link">

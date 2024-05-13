@@ -1,13 +1,13 @@
-import React from "react";
+// import React from "react";
 import Ticket from "../../Ticket";
-import { Swiper, SwiperSlide } from "swiper/react";
+// import { Swiper, SwiperSlide } from "swiper/react";
 
 // // Import Swiper styles
 // import "swiper/css";
 // import "swiper/css/pagination";
 // import "swiper/css/navigation";
 
-import { Pagination, Navigation } from "swiper/modules";
+// import { Pagination, Navigation } from "swiper/modules";
 
 function SuccessfulPay() {
   const slides = [<Ticket />, <Ticket />, <Ticket />];
@@ -34,7 +34,7 @@ function SuccessfulPay() {
           rowGap: "20px",
         }}
       >
-        {slides.map((slide, index) => slide)}
+        {slides.map((slide) => slide)}
       </div>
 
       {/* <div style={{ position: "relative" }}>

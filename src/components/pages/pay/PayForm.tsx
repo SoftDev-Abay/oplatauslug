@@ -1,7 +1,6 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 function PayForm() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <div className="right-part2">
       <h1

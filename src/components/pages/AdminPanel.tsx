@@ -1,4 +1,3 @@
-import React from "react";
 import "./AdminPanel.css"; // Importing the CSS file
 
 const AdminPanel = () => {

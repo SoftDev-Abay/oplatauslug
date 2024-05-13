@@ -1,6 +1,6 @@
-import React, { useState, FC } from "react";
+import { useState, FC } from "react";
 import { IoChevronDown } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./LinksBox.css";
 
@@ -8,23 +8,41 @@ interface LinksBoxProps {
   title: string;
   url: string;
   img: string;
-  nestedLinks: { title: string; url: string }[];
+  nestedLinks?: { title: string; url: string }[];
 }
 
-const LinksBox: FC<LinksBoxProps> = ({ title, nestedLinks, img, ...rest }) => {
+const LinksBox: FC<LinksBoxProps> = ({
+  title,
+  url,
+  nestedLinks,
+  img,
+  ...rest
+}) => {
   const [nestedOpen, setNestedOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleNestedOpen = () => {
+    if (nestedLinks) {
+      setNestedOpen((prev) => !prev);
+    } else {
+      navigate(url);
+    }
+  };
+
   return (
     <div>
       <div
-        className="link link_with_icon"
-        onClick={() => setNestedOpen((prev) => !prev)}
+        className={`link ${nestedLinks ? "link_with_icon" : ""}`}
+        onClick={handleNestedOpen}
         {...rest}
       >
         <img src={img} alt="" />
         <p>{title}</p>
-        <IoChevronDown />
+
+        {nestedLinks && <IoChevronDown />}
       </div>
-      {nestedOpen && (
+      {nestedLinks && nestedOpen && (
         <div className="nested-links-container">
           {nestedLinks.map((link) => (
             <Link to={link.url} className="link">
