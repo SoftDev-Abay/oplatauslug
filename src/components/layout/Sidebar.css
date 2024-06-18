@@ -1,0 +1,86 @@
+.sidebar {
+  overflow: auto;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  width: max-content; /* Using pixels instead of fit-content for consistent sizing */
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  padding: 32px 54px 32px 32px; /* Simplified padding */
+  font-size: 16px;
+  background-color: #f1f1f1;
+
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .sidebar {
+    display: flex;
+  }
+}
+
+button {
+  font-size: 15px;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  padding: 12px 15px 12px 15px;
+  border-radius: 10px;
+}
+
+.main-link {
+  font-size: 20px;
+  padding: 0;
+}
+.main-link img {
+  width: 39px;
+  height: 39px;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  display: flex;
+  position: relative;
+  gap: 10px; /* More reasonable gap in pixels */
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  padding: 12px 15px 12px 15px;
+  border-radius: 10px;
+}
+.link_with_icon {
+  justify-content: space-between;
+}
+
+.link img {
+  width: 24px;
+  height: 24px;
+}
+
+.link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-container {
+  display: none;
+  background-color: #262626;
+  padding-left: 8px;
+}
