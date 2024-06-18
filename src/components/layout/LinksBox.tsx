@@ -44,8 +44,8 @@ const LinksBox: FC<LinksBoxProps> = ({
       </div>
       {nestedLinks && nestedOpen && (
         <div className="nested-links-container">
-          {nestedLinks.map((link) => (
-            <Link to={link.url} className="link">
+          {nestedLinks.map((link, index) => (
+            <Link to={link.url} className="link" key={url + index}>
               <p>{link.title}</p>
             </Link>
           ))}

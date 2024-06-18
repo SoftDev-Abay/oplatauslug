@@ -1,6 +1,17 @@
-// import { useNavigate } from "react-router-dom";
-function PayForm() {
-  // const navigate = useNavigate();
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+function PayTicketInfo() {
+  const [ticketCount, setTicketCount] = useState(1);
+  const navigate = useNavigate();
+
+  const staticTicketPrice = 100;
+
+  const goToPrepayment = () => {
+    const payAmount = staticTicketPrice * ticketCount;
+    navigate("/pay/prepayment", { state: { payAmount } });
+  };
+
   return (
     <div className="right-part2">
       <h1
@@ -48,13 +59,14 @@ function PayForm() {
                   color: "#fff",
                   fontWeight: "500",
                 }}
+                onClick={() => setTicketCount(ticketCount - 1)}
               >
                 -
               </button>
               <input
                 type="text"
                 name="field"
-                defaultValue="1"
+                value={ticketCount}
                 style={{ paddingLeft: "7px" }}
               />
               <button
@@ -66,6 +78,7 @@ function PayForm() {
                   fontSize: "20px",
                   color: "#fff",
                 }}
+                onClick={() => setTicketCount(ticketCount + 1)}
               >
                 +
               </button>
@@ -138,11 +151,7 @@ function PayForm() {
               </p>
             </div>
           </div>
-          <a
-            className="no-underline-text"
-            href="/pay/successful"
-            style={{ width: "100%" }}
-          >
+          <a className="no-underline-text" style={{ width: "100%" }}>
             <button
               style={{
                 border: "1px double #4c73eb",
@@ -156,6 +165,7 @@ function PayForm() {
                 margin: "6% 0",
                 color: "#fff",
               }}
+              onClick={goToPrepayment}
             >
               Купить
             </button>
@@ -166,4 +176,4 @@ function PayForm() {
   );
 }
 
-export default PayForm;
+export default PayTicketInfo;

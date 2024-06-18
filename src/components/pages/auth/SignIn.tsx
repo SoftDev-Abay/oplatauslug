@@ -1,7 +1,72 @@
-function SignIn() {
-  return (
+import { useRef, useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../../features/auth/authSlice";
+import { useLoginMutation } from "../../../features/auth/authApiSlice";
+import usePersist from "../../../hooks/usePersist";
+import useTitle from "../../../hooks/useTitle";
+import PulseLoader from "react-spinners/PulseLoader";
+
+const SignIn = () => {
+  useTitle("Employee Login");
+
+  const userRef = useRef<HTMLInputElement>(null);
+  const errRef = useRef<HTMLParagraphElement>(null);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+  const [persist, setPersist] = usePersist();
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [login, { isLoading }] = useLoginMutation();
+
+  useEffect(() => {
+    if (errRef.current) errRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [username, password]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("username", username);
+
+    try {
+      const { accessToken } = await login({ username, password }).unwrap();
+      dispatch(setCredentials({ accessToken }));
+      setUsername("");
+      setPassword("");
+      navigate("/");
+    } catch (err: any) {
+      if (!err.status) {
+        setErrMsg("No Server Response");
+      } else if (err.status === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg(err.data?.message);
+      }
+      if (errRef.current) errRef.current.focus();
+    }
+  };
+
+  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setUsername(e.target.value);
+  const handlePwdInput = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setPassword(e.target.value);
+  const handleToggle = () => setPersist((prev: boolean) => !prev);
+
+  const errClass = errMsg ? "errmsg" : "offscreen";
+
+  if (isLoading) return <PulseLoader color={"#FFF"} />;
+
+  const content = (
     <div>
-      <div className="container">
+      <div className="container" style={{ zIndex: "10000" }}>
         <img src="/img/Group 476.png" alt="" width="40%" height="658px" />
         <div className="parent">
           <div className="i-monitor">
@@ -19,16 +84,37 @@ function SignIn() {
                 Вход
               </h2>
             </div>
-            <form action="#" style={{ marginTop: "-4%" }}>
+
+            <p
+              ref={errRef}
+              className={errClass}
+              aria-live="assertive"
+              style={{ color: "black", fontSize: "14px" }}
+            >
+              {errMsg}
+            </p>
+
+            <form
+              action="#"
+              style={{ marginTop: "-4%" }}
+              onSubmit={handleSubmit}
+              id="myform"
+            >
               <div className="input-box">
                 <input
-                  type="text"
                   placeholder="Логин"
                   style={{
                     fontSize: "14px",
                     fontFamily: "system-ui",
                     color: "#121e6c",
                   }}
+                  type="text"
+                  id="username"
+                  ref={userRef}
+                  value={username}
+                  onChange={handleUserInput}
+                  autoComplete="off"
+                  required
                 />
               </div>
               <div className="input-box">
@@ -40,6 +126,10 @@ function SignIn() {
                     fontFamily: "system-ui",
                     color: "#121e6c",
                   }}
+                  id="password"
+                  onChange={handlePwdInput}
+                  value={password}
+                  required
                 />
               </div>
             </form>
@@ -48,8 +138,10 @@ function SignIn() {
               <div className="check">
                 <input
                   type="checkbox"
-                  checked
                   style={{ width: "20px", height: "20px" }}
+                  id="persist"
+                  onChange={handleToggle}
+                  checked={persist}
                 />
                 <h3
                   style={{
@@ -64,13 +156,14 @@ function SignIn() {
               </div>
             </div>
             <div className="s-monitor">
-              <a
-                className="no-underline-text"
-                href="/admin-panel"
-                style={{ width: "100%" }}
+              <button
+                className="but1"
+                style={{ cursor: "pointer" }}
+                type="submit"
+                form="myform"
               >
-                <button className="but1">Войти</button>
-              </a>
+                Войти
+              </button>
             </div>
             <div className="registration">
               <h3
@@ -102,6 +195,7 @@ function SignIn() {
       />
     </div>
   );
-}
 
+  return content;
+};
 export default SignIn;
