@@ -2,7 +2,6 @@ import {
   createApi,
   fetchBaseQuery,
   FetchArgs,
-  FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 import { setCredentials } from "../../features/auth/authSlice";
 import { RootState } from "../../app/store"; // Import RootState from your store configuration
@@ -58,5 +57,5 @@ const baseQueryWithReauth = async (
 
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
-  endpoints: (builder) => ({}),
+  endpoints: () => ({}),
 });

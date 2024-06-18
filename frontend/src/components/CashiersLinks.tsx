@@ -1,4 +1,3 @@
-import React from "react";
 import { useGetUsersQuery } from "../features/users/usersApiSlice";
 import { PulseLoader } from "react-spinners";
 import LinksBox from "./layout/LinksBox";
@@ -9,7 +8,7 @@ function CashiersLinks() {
     isLoading,
     isSuccess,
     isError,
-    error,
+    // error,
   } = useGetUsersQuery("usersList");
 
   let content;

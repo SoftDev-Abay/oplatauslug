@@ -7,7 +7,6 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { useSendLogoutMutation } from "../../features/auth/authApiSlice";
 import { useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
-import { useGetUsersQuery } from "../../features/users/usersApiSlice";
 import CashiersLinks from "../CashiersLinks";
 
 const links = {
@@ -61,7 +60,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const { isAdmin } = useAuth();
 
-  const [sendLogout, { isLoading, isSuccess, isError, error }] =
+  const [sendLogout, { isLoading, isSuccess, isError }] =
     useSendLogoutMutation();
 
   useEffect(() => {

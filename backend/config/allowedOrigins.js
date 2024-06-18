@@ -3,6 +3,7 @@ const allowedOrigins = [
   "https://www.dandrepairshop.com",
   "https://dandrepairshop.com",
   "http://localhost:5173",
+  "https://uztourist.avr-group.net",
 ];
 
 module.exports = allowedOrigins;

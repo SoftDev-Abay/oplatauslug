@@ -1,4 +1,4 @@
-import { FC, useState, MouseEventHandler } from "react";
+import { FC, useState } from "react";
 
 interface ControlButtonProps {
   title: string;

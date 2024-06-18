@@ -1,5 +1,3 @@
-import React from "react";
-
 const MyFormComponent = () => {
   return (
     <div className="right-anketa">

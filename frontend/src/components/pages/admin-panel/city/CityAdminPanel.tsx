@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import ControlButtons from "../../../admin-panel/ControlButtons";
 import GenerationButtons from "../../../admin-panel/GenerationButtons";
 import TransactionHistory from "../../../admin-panel/TransactionHistory";
 import { useGetPayConfigQuery } from "../../../../features/pay-config/payConfigApiSlice";
 const CityAdminPanel = () => {
-  const { name } = useParams();
+  // const { name } = useParams();
   const { data, error, isLoading } = useGetPayConfigQuery();
 
   if (isLoading) return <div>Loading...</div>;

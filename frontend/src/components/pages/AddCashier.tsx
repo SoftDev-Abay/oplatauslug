@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { useAddNewUserMutation } from "../../features/users/usersApiSlice";
 import useTitle from "../../hooks/useTitle";
 import "./AddCashier.css";
@@ -12,7 +10,7 @@ const cityOptions = ["Khiva", "Bukhara", "Samarkand"];
 const AddCashier = () => {
   useTitle("techNotes: New User");
 
-  const [addNewUser, { isLoading, isSuccess, isError, error }] =
+  const [addNewUser, { isLoading, isSuccess, isError }] =
     useAddNewUserMutation();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
