@@ -8,7 +8,7 @@ import { setCredentials } from "../../features/auth/authSlice";
 import { RootState } from "../../app/store"; // Import RootState from your store configuration
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3500",
+  baseUrl: "https://oplatauslug.onrender.com",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token; // Type cast to RootState
